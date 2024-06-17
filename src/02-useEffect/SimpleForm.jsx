@@ -19,9 +19,20 @@ export const SimpleForm = () => {
     });
   };
 
+  // Con las dependencias de un arreglo vacio se renderiza solo una vez
   useEffect(() => {
     console.log("useEfeect called");
-  });
+  }, []);
+
+  // Este efecto vas a disparar toda vez que haya un cambio en el formulario
+  useEffect(() => {
+    console.log("formState changed");
+  }, [formState]);
+
+  // Este efecto vas a disparar toda vez que haya un cambio en el email
+  useEffect(() => {
+    console.log("email changed");
+  }, [email]);
 
   return (
     <>
