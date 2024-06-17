@@ -13,7 +13,14 @@ export const useForm = (inicialForm = {}) => {
     });
   };
 
+  // funcion para borrar los datos del formulario
+
+  const onResetForm = () => {
+    setFormState(inicialForm);
+  };
+
   return {
+    onResetForm,
     ...formState,
     formState,
     onInputChange,
