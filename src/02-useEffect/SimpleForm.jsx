@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { Message } from "./Message";
 
 export const SimpleForm = () => {
   const [formState, setFormState] = useState({
-    username: "monique",
+    username: "monique123",
     email: "monique123@google.com",
   });
 
@@ -21,17 +22,17 @@ export const SimpleForm = () => {
 
   // Con las dependencias de un arreglo vacio se renderiza solo una vez
   useEffect(() => {
-    console.log("useEfeect called");
+    //console.log("useEfeect called");
   }, []);
 
   // Este efecto vas a disparar toda vez que haya un cambio en el formulario
   useEffect(() => {
-    console.log("formState changed");
+    //console.log("formState changed");
   }, [formState]);
 
   // Este efecto vas a disparar toda vez que haya un cambio en el email
   useEffect(() => {
-    console.log("email changed");
+    //console.log("email changed");
   }, [email]);
 
   return (
@@ -54,6 +55,7 @@ export const SimpleForm = () => {
         value={email}
         onChange={onInputChange}
       />
+      {username === "monique12" && <Message />}
     </>
   );
 };
