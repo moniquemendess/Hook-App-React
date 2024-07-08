@@ -1,6 +1,6 @@
-// useFetch para peticion http
-
 import { useEffect, useState } from "react";
+
+const localCache = {};
 
 export const useFetch = (url) => {
   const [state, setState] = useState({
@@ -12,7 +12,7 @@ export const useFetch = (url) => {
 
   useEffect(() => {
     getFetch();
-  }, [url]); // cuando el url cambio, vuelver a disparar
+  }, [url]);
 
   const setLoadingState = () => {
     setState({
@@ -24,9 +24,20 @@ export const useFetch = (url) => {
   };
 
   const getFetch = async () => {
+    if (localCache[url]) {
+      console.log("Usando caché");
+      setState({
+        data: localCache[url],
+        isLoading: false,
+        hasError: false,
+        error: null,
+      });
+      return;
+    }
+
     setLoadingState();
 
-    const resp = await fetch(url); // peticíon
+    const resp = await fetch(url);
 
     // sleep
     await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -51,7 +62,9 @@ export const useFetch = (url) => {
       hasError: false,
       error: null,
     });
-    // Manejo del cache
+
+    // Manejo del caché
+    localCache[url] = data;
   };
 
   return {
